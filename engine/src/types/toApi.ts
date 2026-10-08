@@ -4,7 +4,7 @@ export const CANCEL_ORDER="CANCEL_ORDER"
 export const GET_DEPTH="GET_DEPTH"
 export const ORDER="ORDER"
 
-export type MessageApi={
+export type MessageToApi={
     type:"DEPTH",
     payload:{
         bids:[string,string][],
