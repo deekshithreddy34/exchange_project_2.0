@@ -12,7 +12,7 @@ vi.mock("redis", () => ({
     })),
 }));
 
-import { RedisManager } from "./RedisManager.js";
+import { RedisManager } from "../RedisManager.js";
 
 describe("RedisManager", () => {
 
