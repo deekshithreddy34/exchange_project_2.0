@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-
-
-
+import { Engine } from "../trade/Engine.js";
+import { BASE_CURRENCY } from "../trade/Engine.js";
+import { afterEach } from "vitest";
 
 // Mock RedisManager
 const mockSendToApi = vi.fn();
 const mockPushMessage = vi.fn();
 const mockPublishMessage = vi.fn();
 
-vi.mock("../src/RedisManager", () => ({
+vi.mock("../RedisManager.ts", () => ({
     RedisManager: {
         getInstance: () => ({
             sendToApi: mockSendToApi,
