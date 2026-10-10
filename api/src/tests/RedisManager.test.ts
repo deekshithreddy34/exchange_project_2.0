@@ -1,6 +1,7 @@
 
-import {it,describe,expect} from "vitest"
+import {it,describe,expect,vi} from "vitest"
 import { RedisManager } from "../RedisManager.js"
+import { createClient } from "redis"
 
 describe("RedisManager",()=>{
     const redis= RedisManager.getInstance()

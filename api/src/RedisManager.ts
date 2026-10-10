@@ -3,6 +3,7 @@ import {type RedisClientType,createClient} from "redis"
 import { type MessageFromOrderbook } from "./types/index.js"
 import {type MessageToEngine} from "./types/to.js" 
 import { create } from "domain";
+import { resolve } from "path";
 
 export class RedisManager{
     private client:RedisClientType;
@@ -24,11 +25,21 @@ export class RedisManager{
         return this.instance;
     }
 
-    public sendAndAwait(message:MessageToEngine){
-        
+    public sendAndAwait(message: MessageToEngine) {
+     
+        return new Promise<MessageFromOrderbook>((resolve)=>{
+            const id= this.getrandomClientId()
+            this.client.subscribe(id,(message)=>{
+                this.client.unsubscribe(id)
+                resolve(JSON.parse(message));
+            })
+            this.publisher.lPush("messages",JSON.stringify({clientId:id,message}))
+
+        })
     }
 
-    public getrandomClientId(){
 
+    public getrandomClientId(){
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 }
